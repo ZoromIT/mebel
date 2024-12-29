@@ -13,6 +13,7 @@ body, html {
     background-color: var(--white);
 
     width: 100%;
+    height: 100%;
     margin: 0;
     padding: 0;
 }
@@ -28,52 +29,223 @@ body, html {
     margin-right: auto;
     margin-left: auto;
 }
+/* Навигация */
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+/* Стили для списка навигации */
+.navigation ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 0;
+}
+
+/* Стили для ссылок навигации */
+.navigation a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.6rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.navigation a:hover {
+    color: black;
+}
+
+/* Стили для бургер-меню */
+.burger-menu {
+    display: none;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    width: 30px;
+    height: 25px;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.burger-menu span {
+    display: block;
+    width: 100%;
+    height: 4px;
+    background-color: white;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+/* Анимация для бургер-меню */
+.burger-menu.open span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.burger-menu.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.burger-menu.open span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Для больших экранов (ноутбуки и ПК) */
+@media (min-width: 1025px) {
+    .navigation ul {
+        display: flex;
+    }
+
+    .burger-menu {
+        display: none;
+    }
+}
+
+/* Для планшетов и ноутбуков */
+@media (max-width: 1024px) {
+    .navigation ul {
+        gap: 30px;
+    }
+
+    /* Здесь скрываем обычное меню, и оно станет бургер-меню */
+    .burger-menu {
+        display: flex;
+    }
+
+    .navigation ul {
+        display: none; /* Меню скрыто по умолчанию */
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 20px 0;
+        z-index: 999;
+    }
+
+    /* Когда бургер активен — меню показывается */
+    .navigation.active ul {
+        display: flex;
+    }
+}
+
+/* Для мобильных устройств */
+@media (max-width: 768px) {
+    .navigation a {
+        font-size: 1.2rem; /* Немного уменьшить шрифт на маленьких экранах */
+    }
+}
+
+
 
 /* main */
 
 main {
-    margin: 8px;
+    margin: 0; /* Убираем любые внешние отступы */
+    padding: 0; /* Убираем внутренние отступы */
     background-image: url(../images/main.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 85vh;
+    height: 85vh; /* Занимает 100% высоты окна */
+    width: 100vw; /* Занимает 100% ширины окна */
+    overflow: hidden; /* Исключаем скроллинг из-за возможных смещений */
+    display: flex; /* Центрируем контент */
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box; /* Гарантируем правильные расчеты ширины */
 }
-
-
-/* Для экранов с шириной до 768px (например, мобильные устройства) */
-@media (max-width: 768px) {
-    main {
-        background-image: url(../images/main-mobile.jpg); /* Смена фона на мобильных устройствах */
-        height: 60vh; /* Меньше высота на мобильных экранах */
-    }
-}
-
-/* Для экранов с шириной до 480px (самые маленькие мобильные устройства) */
-@media (max-width: 480px) {
-    main {
-        background-image: url(../images/main-mobile-small.jpg); /* Смена фона на еще меньших экранах */
-        height: 50vh; /* Еще меньше высота для маленьких экранов */
-    }
-}
-
 
 .main-inner {
-    padding-top: 69px;
-    padding-left: 42px;
-    
+    padding: 69px 42px;
+    max-width: 800px; /* Ограничение ширины текста */
 }
 
 .main-inner h1 {
-    font-size: 63px;
-    line-height: 65px;
+    font-size: 5.5rem; /* Более универсальный размер шрифта */
+    line-height: 1.2;
     color: var(--white);
-    font-weight: 400;
-    font-weight: bold;
+    font-weight: 700; /* Более читаемое написание */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-
     margin-bottom: 36px;
 }
+
+.main-inner p {
+    font-size: 1.8rem; /* Добавлен пример параграфа */
+    line-height: 1.6;
+    color: var(--white);
+    margin-top: 12px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+    main {
+        height: 70vh; /* Уменьшение высоты */
+        margin: 8px 0; /* Сокращение внешних отступов */
+    }
+
+    .main-inner {
+        padding: 40px 24px; /* Сокращение отступов */
+    }
+
+    .main-inner h1 {
+        font-size: 4rem;
+    }
+}
+
+@media (max-width: 768px) {
+    main {
+        height: 60vh; /* Еще меньше высота */
+    }
+
+    .main-inner {
+        padding: 32px 16px;
+    }
+
+    .main-inner h1 {
+        font-size: 3rem;
+    }
+
+    .main-inner p {
+        font-size: 1.4rem; /* Уменьшение размера текста */
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        height: 50vh;
+        margin: 8px 0;
+    }
+
+    .main-inner {
+        padding: 24px 12px;
+    }
+
+    .main-inner h1 {
+        font-size: 2.2rem;
+        line-height: 1.3;
+    }
+
+    .main-inner p {
+        font-size: 1.2rem;
+    }
+}
+
+
 
 
 
@@ -96,7 +268,12 @@ main {
 
 /* catalog */
 
-.catalog {
+
+
+
+
+
+.catalog { 
     margin-top: 59px;
     padding-bottom: 1px;
 }
@@ -105,13 +282,14 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-around;
-
     margin-bottom: 40px;
 }
 
 .catalog-start-item {
     display: flex;
     align-items: center;
+    justify-content: center; /* Центрируем элементы */
+    text-align: center;
 }
 
 .catalog-start-item span {
@@ -129,21 +307,25 @@ main {
     text-transform: uppercase;
 }
 
+/* Адаптивность */
+
+/* Заголовок каталога */
 .catalog-title {
     margin-bottom: 36px;
     font-weight: 400;
     font-size: 125px;
     line-height: 100.25px;
-
     text-align: center;
 }
 
+/* Контейнер для элементов, чтобы центрировать все */
 .catalog-inner {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
 }
 
+/* Элементы каталога */
 .catalog-item {
     width: 20%;
     margin-bottom: 37px;
@@ -172,25 +354,54 @@ main {
     text-transform: uppercase;
 }
 
-.catalog-button {
-    font-family: var(--font);
-    text-transform: uppercase;
-    border: none;
-    outline: none;
-    background-color: var(--black);
-    padding: 15px 26px;
-    border-radius: 4.17px;
-    color: var(--white);
-    font-size: 9px;
-    font-weight: 400;
 
-    margin-right: auto;
-    margin-left: auto;
-    display: block;
-
-    cursor: pointer;
+/* Используем transform для уменьшения размера при меньших экранах */
+@media (max-width: 1024px) {
+    .catalog-start-item {
+        transform: scale(0.85); /* Масштабируем элементы на 85% */
+        font-size: 15px; /* Уменьшаем шрифт для лучшего отображения */
+    }
 }
 
+@media (max-width: 768px) {
+    .catalog-start-item {
+        transform: scale(0.75); /* Масштабируем элементы на 75% */
+        font-size: 13px; /* Уменьшаем шрифт еще больше */
+    }
+}
+
+@media (max-width: 480px) {
+    .catalog-start-item {
+        transform: scale(0.65); /* Масштабируем элементы на 65% */
+        font-size: 12px; /* Уменьшаем шрифт на еще меньших экранах */
+    }
+}
+
+
+@media (max-width: 1024px) {
+    .catalog-title {
+        font-size: 90px; /* Уменьшаем размер шрифта на экранах планшетов */
+    }
+}
+
+@media (max-width: 768px) {
+    .catalog-title {
+        font-size: 70px; /* Уменьшаем размер шрифта на экранах мобильных устройств */
+    }
+}
+
+@media (max-width: 480px) {
+    .catalog-title {
+        font-size: 50px; /* Еще больше уменьшаем размер шрифта для маленьких экранов */
+    }
+}
+
+/* Использование vw для более гибкой адаптации */
+@media (max-width: 1200px) {
+    .catalog-title {
+        font-size: 10vw; /* Это делает шрифт пропорциональным ширине экрана */
+    }
+}
 
 
 
@@ -216,53 +427,86 @@ main {
 
 
 .achievements {
-    background-color: #ffffff;
     padding: 25px 0;
     max-width: 1200px;
     margin-right: auto;
     margin-left: auto;
+}
 
-}
 .achievements h2 {
-    color: #333;
+    margin-bottom: 36px;
+    font-weight: 400;
+    font-size: 115px; /* Оставляем прежний размер шрифта */
+    line-height: 100.25px;
     text-align: center;
-    margin-bottom: 10px;
 }
+
 .achievements .cards {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 20px;
 }
+
 .achievement-card {
-    width: calc(33% - 20px);
+    width: calc(33% - 20px); /* Основная ширина карточки */
     background-color: #ffffff;
-    border-radius: 10px;
+    border-radius: 8px; /* Уменьшаем скругление для более компактного вида */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     text-align: center;
-    padding: 20px;
+    padding: 15px; /* Уменьшаем отступы внутри карточки */
     transition: transform 0.3s ease;
 }
+
 .achievement-card:hover {
     transform: translateY(-10px);
 }
+
 .achievement-card img {
-    width: 250px;
-    height: 160px;
+    width: 100%; /* Делаем изображение адаптивным */
+    height: 140px; /* Уменьшаем высоту изображения */
     object-fit: cover;
-    margin-bottom: 20px;
+    margin-bottom: 15px; /* Уменьшаем отступ между картинкой и текстом */
 }
+
 .achievement-card h3 {
-    font-size: 1.5rem;
+    font-size: 1.2rem; /* Уменьшаем размер заголовка */
     color: #333;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
+
 .achievement-card p {
-    
     color: #666;
-    font-size: 13px;
+    font-size: 14px; /* Увеличиваем размер текста для лучшей читаемости */
 }
+
+/* Адаптивность для экранов */
+@media (max-width: 1024px) {
+    .achievement-card {
+        width: calc(50% - 20px); /* 2 карточки на экранах до 1024px */
+    }
+}
+
+@media (max-width: 768px) {
+    .achievement-card {
+        width: 100%; /* 1 карточка на мобильных устройствах */
+    }
+
+    .achievements h2 {
+        font-size: 8.5rem; /* Уменьшаем размер шрифта заголовка */    }
+
+    .achievement-card h3 {
+        font-size: 1rem; /* Уменьшаем размер заголовка на мобильных */
+    }
+
+    .achievement-card p {
+        font-size: 1rem; /* Увеличиваем размер текста на мобильных */
+    }
+}
+
+
+
 
 
 
@@ -280,7 +524,7 @@ main {
 .card {
     background-color: white;
     border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
     min-height: 540px; /* Устанавливает минимальную высоту для карточек */
     transition: transform 0.3s ease;
@@ -308,12 +552,40 @@ main {
     line-height: 1.5; /* Устанавливает высоту строки для улучшения читаемости */
 }
 
+/* Адаптивность для маленьких экранов */
+@media (max-width: 1024px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr); /* На планшетах будет 2 колонки */
+    }
+}
+
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr; /* На мобильных устройствах будет 1 колонка */
+    }
+
+    .card h2 {
+        font-size: 1.5rem; /* Уменьшаем размер шрифта заголовка */
+    }
+
+    .card p {
+        font-size: 1.4rem; /* Уменьшаем размер шрифта текста */
+    }
+}
+
+
+
+
+
+
+
+
+
 /* mission */
 
 .mission {
     padding-bottom: 50.84px;
-    margin-right: 50px;
-    margin-left: 50px;
+    margin: 0 50px; /* Упрощаем запись отступов */
     border-bottom: 1px rgba(31, 30, 30, 0.1) solid;
     margin-bottom: 49.16px;
     text-align: center;
@@ -323,157 +595,251 @@ main {
     padding-top: 50px;
     margin-bottom: 16px;
     font-weight: 400;
-    font-size: 21px;
-    line-height: 13.75px;
+    font-size: 3.0rem; /* Уменьшаем начальный размер шрифта */
+    line-height: 1.25; /* Устанавливаем line-height в относительных единицах */
     text-decoration: underline;
-
 }
 
 .mission p {
     font-weight: 400;
-    font-size: 38px;
-    line-height: 45.83px;
+    font-size: 4rem; /* Уменьшаем начальный размер шрифта */
+    line-height: 1.5; /* Устанавливаем line-height в относительных единицах */
 
-    width: 681px;
+    width: 80%; /* Используем проценты для ширины */
     margin-right: auto;
     margin-left: auto;
 }
 
+/* Адаптивность для различных экранов */
+@media (max-width: 1024px) {
+    .mission h2 {
+        font-size: 4vw; /* Уменьшаем размер шрифта заголовка для планшетов */
+    }
+
+    .mission p {
+        font-size: 6vw; /* Увеличиваем шрифт для текста на экранах с меньшей шириной */
+        width: 90%; /* Увеличиваем ширину для текста */
+    }
+}
+
+@media (max-width: 768px) {
+    .mission h2 {
+        font-size: 5vw; /* Еще больше уменьшаем шрифт на мобильных устройствах */
+    }
+
+    .mission p {
+        font-size: 7vw; /* Увеличиваем шрифт для текста на мобильных устройствах */
+        width: 95%; /* Максимально расширяем текст на маленьких экранах */
+    }
+}
+
+@media (max-width: 480px) {
+    .mission h2 {
+        font-size: 6vw; /* Уменьшаем размер шрифта для очень маленьких экранов */
+    }
+
+    .mission p {
+        font-size: 8vw; /* Увеличиваем шрифт для маленьких экранов */
+        width: 95%; /* Делаем текст максимально широким */
+    }
+}
 
 /* mebel */
 
 .mebel-inner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    margin-bottom: 35px;
+    display: flex; /* Флекс-контейнер */
+    align-items: center; /* Центрируем по вертикали */
+    justify-content: center; /* Центрируем по горизонтали */
+    gap: 16px; /* Расстояние между элементами */
+    margin-bottom: 35px; /* Отступ снизу */
+    flex-wrap: nowrap; /* Элементы остаются на одной линии */
+    max-width: 100%; /* Контейнер не превышает ширину экрана */
+    padding: 0 16px; /* Отступы внутри для краев экрана */
+    box-sizing: border-box; /* Учитываем padding в общей ширине блока */
 }
 
-.mebel-inner img {
-    width: 546px;
-    height: 546px;
+.mebel-inner img,
+.mebel-inner div {
+    flex: 0 1 auto; /* Элементы адаптируются под размер родителя */
+    width: 50%; /* Устанавливаем одинаковую ширину для блока и изображения */
+    max-width: 546px; /* Ограничение максимальной ширины */
+    aspect-ratio: 1 / 1; /* Квадратная форма */
+    height: auto; /* Сохраняем пропорции изображения */
+    object-fit: cover; /* Картинка занимает весь блок без искажений */
 }
 
 .mebel-inner div {
-    height: 546px;
-    width: 546px;
-    margin-left: 8px;
-    background-color: #F4EDE6;
-
-    border-radius: 8.33px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    background-color: #F4EDE6; /* Цвет фона */
+    border-radius: 8.33px; /* Скругление углов */
+    display: flex; /* Флекс-контейнер */
+    flex-direction: column; /* Элементы идут в колонку */
+    align-items: center; /* Центрируем элементы горизонтально */
+    justify-content: center; /* Центрируем элементы вертикально */
+    padding: 20px; /* Внутренний отступ */
+    box-sizing: border-box; /* Учитываем padding в общей ширине блока */
 }
 
 .mebel-inner div h3 {
-    
-    font-weight: 400;
-    font-size: 52px;
-    line-height: 58.33px;
-
-    width: 439px;
-    text-align: center;
-
-    margin-bottom: 157px;
-    margin-top: 150px;
+    font-weight: 400; /* Толщина шрифта */
+    font-size: clamp(1.5rem, 3vw, 3rem); /* Адаптивный размер шрифта */
+    line-height: 1.1; /* Межстрочный интервал */
+    text-align: center; /* Текст по центру */
+    margin: 20px 0; /* Отступы сверху и снизу */
 }
 
 .mebel-inner div p {
-    color: #425E44;
-    font-size: 9px;
-    font-weight: 400;
-    line-height: 13.75px;
+    color: #425E44; /* Цвет текста */
+    font-size: clamp(0.7rem, 2.5vw, 1rem); /* Адаптивный размер шрифта */
+    font-weight: 400; /* Толщина шрифта */
+    line-height: 1.5; /* Межстрочный интервал */
+    text-align: center; /* Текст по центру */
+}
+
+/* Медиа-запросы */
+@media (max-width: 768px) {
+    .mebel-inner {
+        gap: 8px; /* Уменьшаем расстояние между элементами */
+    }
+
+    .mebel-inner div,
+    .mebel-inner img {
+        width: 45%; /* Немного уменьшаем ширину на экранах планшетов */
+    }
+}
+
+@media (max-width: 480px) {
+    .mebel-inner {
+        flex-wrap: wrap; /* Элементы размещаются друг под другом */
+        justify-content: space-between; /* Разделяем элементы */
+    }
+
+    .mebel-inner div,
+    .mebel-inner img {
+        width: 100%; /* Элементы занимают всю ширину экрана */
+        max-width: none; /* Убираем ограничение ширины */
+        height: auto; /* Сохраняем пропорции */
+    }
+
+    .mebel-inner div h3 {
+        font-size: 2rem; /* Уменьшаем размер шрифта */
+    }
+
+    .mebel-inner div p {
+        font-size: 0.8rem; /* Уменьшаем размер шрифта */
+    }
 }
 
 /* nothing */
 
-.nothing-title {
-    text-align: center;
-    margin-bottom: 39px;
-    font-size: 142px;
-    font-weight: 400;
-    color: var(--black);
-}
-
-.nothing-text {
-    text-align: center;
-    font-weight: 400;
-    font-size: 21px;
-    line-height: 29.17px;
-    margin-bottom: 24px;
-    color: var(--black);
-}
-
-.nothing button {
-    padding: 15px 26px;
-    font-weight: 400;
-    line-height: 9.17px;
-    font-size: 9px;
-    font-family: var(--font);
-    background-color: var(--black);
-    color: var(--white);
-    border-radius: 4.17px;
-    border: none;
-    outline: none;
-
-    margin-right: auto;
-    margin-left: auto;
-    display: block;
-
-    margin-bottom: 50px;
-
-    transition: all .5s ease;
-}
-
-.nothing button:hover {
-    opacity: 0.5;
-    cursor: pointer;
-}
-
-
 .nothing-inner {
-    margin-bottom: 235px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: center; /* Вертикальное центрирование */
+    justify-content: center; /* Горизонтальное центрирование */
+    gap: 16px; /* Расстояние между элементами */
+    margin-bottom: 90px; /* Отступ снизу */
+    flex-wrap: nowrap; /* Элементы остаются на одной линии */
+    max-width: 100%; /* Контейнер не превышает ширину экрана */
+    padding: 0 16px; /* Отступы внутри для краев экрана */
+    box-sizing: border-box; /* Учитываем padding в общей ширине */
 }
 
 .nothing-inner div {
-    width: 546px;
-    height: 546px;
-    margin-right: 8px;
-
+    flex: 0 1 auto; /* Элементы адаптируются под размер родителя */
+    width: 50%; /* Устанавливаем одинаковую ширину для блока и изображения */
+    max-width: 546px; /* Ограничение максимальной ширины */
+    aspect-ratio: 1 / 1; /* Квадратная форма */
     background-image: url(../images/no-img.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-}
 
-.nothing-inner div {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 .nothing-inner div p {
-    margin-bottom: 28px;
-    font-size: 46px;
-    line-height: 50px;
+    margin: 20px 0; /* Отступ сверху и снизу */
+    font-size: clamp(18px, 3vw, 46px); /* Адаптивный размер текста */
+    line-height: 1.2;
     font-weight: 400;
     color: var(--black);
+    max-width: 330px; /* Ограничение ширины текста */
     text-align: center;
-    width: 330px;
 }
 
 .nothing-inner img {
-    width: 546px;
-    height: 546px;
+    flex: 0 1 auto; /* Адаптивная ширина и высота */
+    width: 50%; /* Устанавливаем одинаковую ширину для блока и изображения */
+    max-width: 546px; /* Ограничение максимальной ширины */
+    height: auto; /* Сохраняем пропорции изображения */
+    object-fit: cover; /* Картинка занимает весь блок без искажений */
 }
+
+/* Стили для кнопки */
+.nothing-inner button {
+    padding: 12px 24px;
+    background-color: #007BFF;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+   
+}
+
+
+.nothing-inner button:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px); /* Эффект поднятия кнопки при наведении */
+}
+
+.nothing-inner button:active {
+    background-color: #004085;
+    transform: translateY(1px); /* Эффект при нажатии на кнопку */
+}
+
+/* Медиа-запросы */
+@media (max-width: 768px) {
+    .nothing-inner {
+        gap: 8px; /* Уменьшение расстояния между элементами */
+    }
+
+    .nothing-inner div,
+    .nothing-inner img {
+        width: 45%; /* Немного уменьшаем ширину на экранах планшетов */
+    }
+
+    .nothing-inner button {
+        font-size: 16px; /* Уменьшаем размер текста на кнопке на планшетах */
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nothing-inner {
+        flex-wrap: wrap; /* Элементы размещаются друг под другом */
+        justify-content: space-between; /* Разделяем элементы */
+    }
+
+    .nothing-inner div,
+    .nothing-inner img {
+        width: 100%; /* Элементы занимают всю ширину экрана */
+        max-width: none; /* Убираем ограничение ширины */
+        height: auto; /* Сохраняем пропорции */
+    }
+
+    .nothing-inner button {
+        font-size: 14px; /* Уменьшаем размер шрифта на мобильных устройствах */
+        padding: 8px 16px; /* Уменьшаем размеры кнопки на мобильных */
+    }
+}
+
 
 
 
@@ -483,7 +849,7 @@ main {
     left: 50%; /* Центровка по горизонтали */
     transform: translateX(-50%); /* Корректируем смещение */
     width: 1260px; /* Ширина узкого прямоугольника */
-    background-image: url("assets/images/no-image.jpg"); /* Фон-картинка */
+    background-image: url("assets/images/no-img.jpg"); /* Фон-картинка */
     background-size: cover; /* Растягиваем картинку по размеру блока */
     background-position: center; /* Центрируем фон */
     background-repeat: no-repeat; /* Отключаем повторение */
@@ -500,6 +866,22 @@ main {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 1024px) {
+    .contact-info {
+        font-size: 18px; /* Уменьшаем размер шрифта на планшетах */
+        padding: 8px 15px; /* Уменьшаем отступы */
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-info {
+        font-size: 16px; /* Еще уменьшаем размер шрифта для мобильных устройств */
+        padding: 6px 10px; /* Уменьшаем отступы */
+    }
+}
 
 .contact-info.visible {
     bottom: 20px; /* Показываем в 20px от нижнего края */

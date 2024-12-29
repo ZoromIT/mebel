@@ -15,16 +15,29 @@
 </head>
 <body>
     
-
-<main>
-
-    <div class="container">
-        <div class="main-inner">
-            <h1>Мороз Мебель </h1>   
-        </div>
+    <main>
+        <div class="container">
+           <header>
+    <div class="burger-menu">
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
-
-</main>
+    <div class="navigation">
+        <ul>
+            <li><a href="#products">Продукция</a></li>
+            <li><a href="#mission">Миссия</a></li>
+            <li><a href="#achievements">Достижения</a></li>
+            <li><a href="#order">Заказать</a></li>
+        </ul>
+    </div>
+</header>
+        
+    </main>
+    
+    
+    
+ 
 
 <section class="catalog">
 
@@ -72,7 +85,7 @@
     </div>
     </section>
 
-    
+    <section id="products">
     <section>
                 <h2 class="catalog-title">Мы предлагаем</h2>
         
@@ -96,12 +109,12 @@
              
                 </div>
             </section>
-         
+        </section>
 
         
 
 
-
+        <section id="mission">
 <section class="mission">
 
     <div class="container">
@@ -113,6 +126,7 @@
 
     </div>
 
+</section>
 </section>
 
 <section class="mebel">
@@ -143,6 +157,7 @@
 
 
        
+    <section id="achievements">
 
         <section id="achievements" class="achievements">
             
@@ -194,7 +209,7 @@
                     </div>
                 </div>
             </section>
-
+        </section>
             
                 
     
@@ -205,7 +220,7 @@
 
 
 
-
+        <section id="order">
     <section>
 
         <div class="nothing-inner">
@@ -229,17 +244,47 @@
 
    
 </section>
-
+</section>
 
 
 <div class="contact-info" id="contactInfo">
-    <p>Свяжитесь с нами: <a href="mailto:info@example.com">info@example.com</a> | Телефон: +1 234 567 890</p>
+    <p><a href="mailto:info@example.com">info@example.com</a> | Телефон: +1 234 567 890</p>
 </div>
 
 
 
 
+
+
+
+
+
 <script>
+    // Скрипт для появления элемента при скроллинге до конца страницы
+    window.addEventListener('scroll', function () {
+        const contactInfo = document.getElementById('contactInfo');
+        const scrollPosition = window.scrollY + window.innerHeight; // Позиция прокрутки + высота окна
+        const documentHeight = document.body.scrollHeight; // Полная высота документа
+
+        // Показываем блок, если пользователь дошёл до конца страницы
+        if (scrollPosition >= documentHeight - 10) {
+            contactInfo.classList.add('visible');
+        } else {
+            contactInfo.classList.remove('visible');
+        }
+    });
+
+   // Получаем кнопку по её классу
+   const button = document.querySelector('.nothing-inner button ');
+
+// Добавляем обработчик события на клик
+button.addEventListener('click', function() {
+    // Выводим сообщение при нажатии на кнопку
+    alert('Ваш заказ принят!'); // Здесь можно заменить на любой текст или действие
+});
+
+
+
 window.addEventListener('scroll', function () {
     const contactInfo = document.getElementById('contactInfo');
     const scrollPosition = window.scrollY + window.innerHeight; // Позиция прокрутки + высота окна
@@ -253,8 +298,22 @@ window.addEventListener('scroll', function () {
     }
 });
 
+// Получаем элементы бургер-меню и навигации
+const burgerMenu = document.querySelector('.burger-menu');
+    const navigation = document.querySelector('.navigation');
+
+    // При клике на бургер меняем класс "open"
+    burgerMenu.addEventListener('click', function() {
+        navigation.classList.toggle('active');
+        burgerMenu.classList.toggle('open');
+    });
+
+
+
 
 </script>
 
 </body>
+
+
 </html>
